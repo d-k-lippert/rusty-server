@@ -7,7 +7,7 @@ const port =  process.env.PORT || 8080
 const unityClient = "unity-client";
 const webClient = "web-client";
 const wsClientsMap = new Map();
-const host = location.origin.replace(/^http/, 'ws')
+const url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
 const app = express();
 
@@ -16,7 +16,7 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function (ws) {
   console.log("client joined.");
-  console.log(host)
+  console.log(url)
 
   ws.on("message", function (data) {
     if (typeof data === "string") {
