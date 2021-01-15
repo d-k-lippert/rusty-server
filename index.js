@@ -3,6 +3,7 @@ const express = require("express");
 const { createServer } = require("http");
 const WebSocket = require("ws");
 
+const port =  process.env.PORT || 8080
 const unityClient = "unity-client";
 const webClient = "web-client";
 const wsClientsMap = new Map();
@@ -50,6 +51,6 @@ wss.on("connection", function (ws) {
   });
 });
 
-server.listen(8080, function () {
+server.listen(port, function () {
   console.log("Listening on http://localhost:8080");
 });
