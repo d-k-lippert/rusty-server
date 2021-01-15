@@ -7,7 +7,7 @@ const port =  process.env.PORT || 8080
 const unityClient = "unity-client";
 const webClient = "web-client";
 const wsClientsMap = new Map();
-const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+const url =   "https://vrusty-server.herokuapp.com/"
 
 const app = express();
 
