@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+// const crypto = require("crypto");
 const express = require("express");
 const { createServer } = require("http");
 const WebSocket = require("ws");
@@ -7,7 +7,7 @@ const port =  process.env.PORT || 8080
 const unityClient = "unity-client";
 const webClient = "web-client";
 const wsClientsMap = new Map();
-const url =   "https://vrusty-server.herokuapp.com/"
+// const url ="https://vrusty-server.herokuapp.com/"  // url where nodejs app is hosted
 
 const app = express();
 
@@ -16,7 +16,7 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function (ws) {
   console.log("client joined.");
-  console.log(url)
+  // console.log(url)
 
   ws.on("message", function (data) {
     if (typeof data === "string") {
