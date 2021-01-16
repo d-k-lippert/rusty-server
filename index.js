@@ -3,8 +3,7 @@ const express = require("express");
 const { createServer } = require("http");
 const WebSocket = require("ws");
 
-const port = process.env.PORT || 8080
-
+const port =  process.env.PORT || 8080
 const unityClient = "unity-client";
 const webClient = "web-client";
 const wsClientsMap = new Map();
@@ -17,8 +16,9 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function (ws) {
   console.log("client joined.");
-  /* console.log(url) */
+  // console.log(url)
 
+  // first message to identify clients
   ws.on("message", function (data) {
     if (typeof data === "string") {
       if (data === "web") {
@@ -37,18 +37,26 @@ wss.on("connection", function (ws) {
 
   ws.on("message", function (data) {
     if (typeof data === "string") {
-      if (wsClientsMap.get(webClient) == ws && data != "web") {
+      if(wsClientsMap.get(unityClient)==ws && wsClientsMap.get(webClient)!=null){
+        console.log(data)
+        wsClientsMap.get(webClient).send(data);
+      }
+
+/*       if (wsClientsMap.get(webClient) == ws && data != "web") {
         console.log(data);
-        wsClientsMap.get(unityClient).send(data);
+        //wsClientsMap.get(unityClient).send(data);
       } else if (wsClientsMap.get(unityClient) == ws) {
         console.log(data);
         //wsClientsMap.get(webClient).send(data);
-      }
+      } */
     }
   });
 
   ws.on("close", function () {
     console.log("client left.");
+
+    // delete websocket connection and delete connection from clientsmap
+    wsClientsMap.get()
     //clearInterval(textSending);
     //clearInterval(binaryInterval);
   });
