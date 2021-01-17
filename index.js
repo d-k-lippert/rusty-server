@@ -20,11 +20,15 @@ wss.on("connection", function (ws) {
 
   // first message to identify clients
   ws.on("message", function (data) {
-    if (typeof data === "string") {
-      if (data === "web") {
-        wsClientsMap.set(webClient, ws);
-      } else if (data === "unity") {
-        wsClientsMap.set(unityClient, ws);
+
+    // so that only 2 clients can connect to the server - newer connections always overwrite the connection
+    if(wsClientsMap.size<2){
+      if (typeof data === "string") {
+        if (data === "web") {
+          wsClientsMap.set(webClient, ws);
+        } else if (data === "unity") {
+          wsClientsMap.set(unityClient, ws);
+        }
       }
     }
   });
@@ -56,11 +60,15 @@ wss.on("connection", function (ws) {
     console.log("client left.");
 
     // delete websocket connection and delete connection from clientsmap
-    wsClientsMap.get()
-    //clearInterval(textSending);
-    //clearInterval(binaryInterval);
+    wsClientsMap.forEach((value, key, wsClientsMap)=>{
+      if(value === ws){
+        wsClientsMap.delete(key)
+      }
+    })
+
   });
 });
+
 
 server.listen(port, function () {
   // console.log("Listening on http://localhost:8080");
