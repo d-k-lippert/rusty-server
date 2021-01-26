@@ -45,6 +45,10 @@ wss.on("connection", function (ws) {
         console.log(data)
         wsClientsMap.get(webClient).send(data);
       }
+      if(wsClientsMap.get(webClient)==ws && wsClientsMap.get(unityClient)!=null){
+        console.log(data)
+        wsClientsMap.get(unityClient).send(data);
+      }
 
 /*       if (wsClientsMap.get(webClient) == ws && data != "web") {
         console.log(data);
@@ -55,6 +59,12 @@ wss.on("connection", function (ws) {
       } */
     }
   });
+
+/*   ws.on("message", function (data) {
+    if (typeof data === "string") {
+      console.log(data)
+    }
+  }); */
 
   ws.on("close", function () {
     console.log("client left.");
