@@ -33,12 +33,6 @@ wss.on("connection", function (ws) {
     }
   });
 
-  // send random bytes interval
-  /*   const binaryInterval = setInterval(
-    () => ws.send(crypto.randomBytes(8).buffer),
-    11000
-  ); */
-
   ws.on("message", function (data) {
     if (typeof data === "string") {
       if(wsClientsMap.get(unityClient)==ws && wsClientsMap.get(webClient)!=null){
@@ -49,22 +43,8 @@ wss.on("connection", function (ws) {
         console.log(data)
         wsClientsMap.get(unityClient).send(data);
       }
-
-/*       if (wsClientsMap.get(webClient) == ws && data != "web") {
-        console.log(data);
-        //wsClientsMap.get(unityClient).send(data);
-      } else if (wsClientsMap.get(unityClient) == ws) {
-        console.log(data);
-        //wsClientsMap.get(webClient).send(data);
-      } */
     }
   });
-
-/*   ws.on("message", function (data) {
-    if (typeof data === "string") {
-      console.log(data)
-    }
-  }); */
 
   ws.on("close", function () {
     console.log("client left.");
