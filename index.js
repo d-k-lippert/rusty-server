@@ -14,8 +14,11 @@ const app = express();
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
+/* const url = aWebSocket.url; */
+
 wss.on("connection", function (ws) {
   console.log("client joined.");
+  console.log(url);
   // console.log(url)
 
   // first message to identify clients
@@ -50,11 +53,11 @@ wss.on("connection", function (ws) {
     console.log("client left.");
 
     // delete websocket connection and delete connection from clientsmap
-    wsClientsMap.forEach((value, key, wsClientsMap)=>{
+/*     wsClientsMap.forEach((value, key, wsClientsMap)=>{
       if(value === ws){
         wsClientsMap.delete(key)
       }
-    })
+    }) */
 
   });
 });
