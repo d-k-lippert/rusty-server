@@ -34,6 +34,7 @@ wss.on("connection", function (ws) {
         }
       }
     }
+    console.log('mapsize: ',wsClientsMap.size)
   });
 
   ws.on("message", function (data) {
