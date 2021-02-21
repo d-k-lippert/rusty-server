@@ -24,8 +24,8 @@ wss.on("connection", function (ws) {
   // first message to identify clients
   ws.on("message", function (data) {
 
-    // so that only 2 clients can connect to the server - newer connections always overwrite the connection
-    if(wsClientsMap.size<2){
+    // so that only 100 clients can connect to the server - newer connections always overwrite the connection
+    if(wsClientsMap.size<100){
       if (typeof data === "string") {
         if (data === "web") {
           wsClientsMap.set(webClient, ws);
