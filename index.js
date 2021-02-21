@@ -18,7 +18,7 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function (ws) {
   console.log("client joined.");
-  console.log(url);
+  /* console.log(url); */
   // console.log(url)
 
   // first message to identify clients
